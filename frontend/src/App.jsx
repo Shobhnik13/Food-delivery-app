@@ -4,6 +4,7 @@ import Header from './Components/Header'
 import { db } from './Firebase'
 import { auth } from './Firebase'
 import { Route,Routes } from 'react-router-dom'
+import { CreateContainer,MainContainer } from './Components'
 function App() {
   
 
@@ -12,8 +13,8 @@ function App() {
       <Header/>
       <main className='mt-24 p-8 w-full'>
         <Routes>
-          <Route path='/*' element={<MainContainer/>}/>
-          <Route path='/createItem' element={<CreateContainer/>}/>
+          <Route path='/*' element={<MainContainer/>} />
+          <Route path='/createItem' element={<CreateContainer/>} />
         </Routes>
       </main>
       </div>
