@@ -5,10 +5,12 @@ import { db } from './Firebase'
 import { auth } from './Firebase'
 import { Route,Routes } from 'react-router-dom'
 import { CreateContainer,MainContainer } from './Components'
+import { AnimatePresence } from 'framer-motion'
 function App() {
   
 
   return (
+    <AnimatePresence>
     <div className="App flex h-auto flex-col w-screen bg-primary">
       <Header/>
       <main className='mt-24 p-8 w-full'>
@@ -18,6 +20,7 @@ function App() {
         </Routes>
       </main>
       </div>
+      </AnimatePresence>
   )
 }
 
