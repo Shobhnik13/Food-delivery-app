@@ -37,12 +37,12 @@ const Header = () => {
             <div className='hidden md:flex w-full h-full items-center justify-between'>
                {/* div for left side logo and branding  */}
                {/* this div will be at left side */}
-               {/* ul,cart,user auth will be at right side */}
                 <Link to={'/'} className='flex items-center gap-2'>
                     <img src={Logo} className='w-8 object-cover' alt="" />
                     <p className='text-headingColor text-xl font-bold'>City</p>
                 </Link>
                 {/* div for ul cart and user auth  */}
+               {/* ul,cart,user auth will be at right side */}
             {/* this ul,cart,user auth will be at right side  */}
             <div className='flex items-center gap-8'>
                 {/* ul  */}
