@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Logo from '../assets/logo.png'
 import {MdShoppingBasket} from 'react-icons/md'
 import Avatar from '../assets/avatar.png'
@@ -7,11 +7,17 @@ import { Link } from 'react-router-dom'
 import {auth,db} from '../Firebase'
 import { getAuth,signInWithPopup,GoogleAuthProvider } from 'firebase/auth'
 import { useEffect } from 'react'
+import { useStateValue } from '../Context/StateProvider'
+import { actionType } from '../Context/Reducer'
 const Header = () => {
     const provider = new GoogleAuthProvider();
+    const[{user},dispatch]=useStateValue()
     const login=async ()=>{
-            const res=await signInWithPopup(auth,provider)
-            console.log(res)
+            const {user:{refreshToken,providerData}}=await signInWithPopup(auth,provider)
+            dispatch({
+                type:actionType.SET_USER,
+                user:providerData[0]
+            })
         }
   return (
     <header className='w-screen fixed z-50  p-6 px-16'>
