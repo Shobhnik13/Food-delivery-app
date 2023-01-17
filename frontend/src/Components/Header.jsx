@@ -90,7 +90,7 @@ const Header = () => {
             </div>
         </div>
             {/* mobile menu  */}
-    <div className='flex md:hidden w-full bg-blue-500 h-full p-4'>
+    <div className='flex md:hidden w-full  h-full p-4'>
 
     </div>
     </header>
