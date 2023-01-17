@@ -119,14 +119,14 @@ const Header = () => {
                     </div>
                 </div>
                 
-        {/* 2-> middle side contains image and name  */}
+        {/* 2-> middle side contains logo and name  */}
 
                 <Link to={'/'} className='flex items-center gap-2'>
                     <img src={Logo} className='w-8 object-cover' alt="" />
                     <p className='text-headingColor text-xl font-bold'>City</p>
                 </Link>
                 {/* 3->contains the user auth img, and the drop down menu at the right side */}
-                
+
                 <div className='relative'> {/*div for user image and the drop sown menu of user we need to set this div as relative to set the absolute div of drop down menu */ } 
                 <motion.img 
                 onClick={login}
