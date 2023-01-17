@@ -109,13 +109,24 @@ const Header = () => {
 
             {/* mobile menu  */}
     <div className='flex md:hidden w-full items-center justify-between  h-full p-4'>
-        {/* mobile div will contain 2 sides */}
-        {/* 1-> left side contains image and name  */}
-    <Link to={'/'} className='flex items-center gap-2'>
+        {/* mobile div will contain 3 sides */}
+        {/* 1->left side contains cart and circle  */}
+
+        <div className='flex items-center justify-center relative'>
+                    <MdShoppingBasket className='text-textColor cursor-pointer' size={30}/>
+                     <div className='absolute top-[-6px] left-[22px] bg-cartNumBg rounded-full w-5 h-5 flex items-center justify-center'>
+                    <p className='text-xs text-white font-semibold'>1</p>
+                    </div>
+                </div>
+                
+        {/* 2-> middle side contains image and name  */}
+
+                <Link to={'/'} className='flex items-center gap-2'>
                     <img src={Logo} className='w-8 object-cover' alt="" />
                     <p className='text-headingColor text-xl font-bold'>City</p>
                 </Link>
-                {/* 2->contains the user auth img, and the drop down menu  */}
+                {/* 3->contains the user auth img, and the drop down menu at the right side */}
+                
                 <div className='relative'> {/*div for user image and the drop sown menu of user we need to set this div as relative to set the absolute div of drop down menu */ } 
                 <motion.img 
                 onClick={login}
