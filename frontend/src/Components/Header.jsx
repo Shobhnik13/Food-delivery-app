@@ -22,7 +22,14 @@ const Header = () => {
     
     //logout function
     const logout=()=>{
-        
+        //disabling the menu 
+        setMenu(false)
+        //clearing the local storage
+        localStorage.clear()
+        dispatch({
+            type:actionType.SET_USER,
+            user:null
+        })
     }
 
     //login function
