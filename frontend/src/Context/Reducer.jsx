@@ -6,7 +6,7 @@ const Reducer=(state,action)=>{
     switch(action.type){
         case actionType.SET_USER:
             return {
-                //keeping the whole staten as it is just updating the user data
+                //keeping the whole state as it is just updating the user data
                 ...state,
                 user:action.user, 
             };

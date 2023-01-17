@@ -8,17 +8,26 @@ import {auth,db} from '../Firebase'
 import { getAuth,signInWithPopup,GoogleAuthProvider } from 'firebase/auth'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useStateValue } from '../Context/StateProvider'
+import { StateContext, useStateValue } from '../Context/StateProvider'
 import { actionType } from '../Context/Reducer'
 const Header = () => {
     // state for drop down menu 
     const [menu, setMenu] = useState(false)
+    
     // auth provider 
     const provider = new GoogleAuthProvider();
-    // state management using use reducer 
+
+    // state management using use reducer
     const[{user},dispatch]=useStateValue()
+    
+    //logout function
+    const logout=()=>{
+        
+    }
+
+    //login function
     const login=async ()=>{
-            if(!user){
+            if(!user){  {/* if user is not present then fetch user and dispatch the action and user data*/ }
                 const {user:{refreshToken,providerData}}=await signInWithPopup(auth,provider)
             dispatch({
                 type:actionType.SET_USER,
@@ -26,13 +35,13 @@ const Header = () => {
             })
             localStorage.setItem('user',JSON.stringify(providerData[0]))
         }
-        else{
+        else{ {/* if user already exists then show the drop down menu on clicking the button*/ }
                setMenu(prevMenu=>!prevMenu) 
         }
             }
 
   return (
-    <header className='w-screen fixed z-50  p-6 px-16'>
+    <header className='w-screen fixed z-50 p-3 px-4 md:p-6 md:px-16'>
             {/* laptop and tablets */}
             <div className='hidden md:flex w-full h-full items-center justify-between'>
                {/* div for left side logo and branding  */}
@@ -82,16 +91,66 @@ const Header = () => {
                     </Link>
                 ) 
                 }
-                <p className='px-4 py-2 flex items-center justify-center gap-3  hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor'>Logout <MdLogout/></p>
+                <p onClick={logout} className='px-4 py-2 flex items-center justify-center gap-3  hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor'>Logout <MdLogout/></p>
                 </motion.div>
                     )
                 }
                 </div>
             </div>
         </div>
-            {/* mobile menu  */}
-    <div className='flex md:hidden w-full  h-full p-4'>
 
+
+            {/* mobile menu  */}
+    <div className='flex md:hidden w-full items-center justify-between  h-full p-4'>
+        {/* mobile div will contain 2 sides */}
+        {/* 1-> left side contains image and name  */}
+    <Link to={'/'} className='flex items-center gap-2'>
+                    <img src={Logo} className='w-8 object-cover' alt="" />
+                    <p className='text-headingColor text-xl font-bold'>City</p>
+                </Link>
+                {/* 2->contains the user auth img, and the drop down menu  */}
+                <div className='relative'> {/*div for user image and the drop sown menu of user we need to set this div as relative to set the absolute div of drop down menu */ } 
+                <motion.img 
+                onClick={login}
+                whileTap={{scale: 0.6}}
+                src={user? user.photoURL :Avatar } 
+                alt="userProfile" 
+                className='w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full' 
+                />
+                
+                {
+                    // menu will only be shown when menu state will be true 
+                    menu && (
+                        <div className='w-40 bg-gray-50 top-12 right-[-20px]  shadow-xl rounded-md absolute flex flex-col '>
+                {/* menu consist of 3 things in mobile view */}
+                
+                {/* these 3 things will be opened and closed whenever the menu state will be rendered */}
+                
+                {/* 1->the create item option  */}
+
+                {
+                user && user.email==='shobhnikw@gmail.com' &&(
+                    <Link to={'/createItem'}>
+                    <p className='px-4 py-2 flex items-center  gap-3 hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor'>New item <MdAdd/> </p>
+                    </Link>
+                ) 
+                }
+                {/* 2->the ul of the laptop view  */}
+                
+                <ul className='flex flex-col  '>
+                    <li className=' text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Home</li>
+                    <li className='text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Menu</li>
+                    <li className='text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>About us</li>
+                    <li className='text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Service</li>
+                </ul>
+                {/* 3->the logout option  */}
+                
+                <p onClick={logout} className='px-4 py-2 shadow-md m-2 flex items-center  gap-3 bg-gray-200  hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor'>Logout <MdLogout/></p>
+                </div>
+                    )
+                }
+                </div>
+                
     </div>
     </header>
   )
