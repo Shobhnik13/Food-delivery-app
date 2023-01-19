@@ -24,13 +24,17 @@ const HomeContainer = () => {
         <button className='bg-gradient-to-br from-orange-400 to-orange-500 py-2 rounded-lg hover:shadow-lg w-full md:w-auto px-4 transition-all duration-100 ease-in-out'>Order Now</button>
        </div>
 
+
+
        {/* right view  */}
        <div className="flex-1 py-2 items-center relative ">
         {/* div 1 for img  */}
             <img src={HeroBg} alt="" className='w-full md:w-auto h-420 ml-auto lg:h-[650px]' />
         {/* div 2  */}
-        <div className='absolute flex w-full h-full items-center justify-center'>
+        <div className='absolute flex w-full h-full top-0 left-0 items-center justify-center px-16 py-4'>
+            <div className='w-190  bg-red-200 p-2'>
 
+            </div>
         </div>
         </div>
     
