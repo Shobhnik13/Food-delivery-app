@@ -33,7 +33,7 @@ const HomeContainer = () => {
         {/* div 2  */}
         <div className='absolute flex w-full h-full top-0 left-0 items-center justify-center px-16 py-4'>
             <div className='w-190  bg-red-200 p-2'>
-
+                s
             </div>
         </div>
         </div>
