@@ -1,6 +1,7 @@
 import React from 'react'
 import Delivery from '../assets/delivery.png'
 import HeroBg from '../assets/heroBg.png'
+import I1 from '../assets/i1.png'
 
 const HomeContainer = () => {
   return (
@@ -27,13 +28,16 @@ const HomeContainer = () => {
 
 
        {/* right view  */}
-       <div className="flex-1 py-2 items-center relative ">
+       <div className="flex-1 py-2 flex items-center relative ">
         {/* div 1 for img  */}
             <img src={HeroBg} alt="" className='w-full md:w-auto h-420 ml-auto lg:h-[650px]' />
         {/* div 2  */}
-        <div className='absolute flex w-full h-full top-0 left-0 items-center justify-center px-16 py-4'>
-            <div className='w-190  bg-red-200 p-2'>
-                s
+        <div className='absolute flex w-full h-full top-0 left-[-100px] items-center justify-center px-32 py-4'>
+            <div className='w-200 p-4 bg-cardOverlay backdrop:blur-md rounded-3xl flex flex-col items-center justify-center'>
+              <img src={I1} alt="" className='w-40 -mt-20' />
+              <p className='text-textColor text-lg font-semibold'>Icecream</p>      
+              <p className='text-sm text-lightTextGray font-semibold my-2'>Chocolate & vanilla</p>
+              <p className='text-sm font-semibold text-headingColor'><span className='text-xs text-red-600'>$</span>5.25</p>
             </div>
         </div>
         </div>
