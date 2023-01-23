@@ -92,9 +92,9 @@ const Header = () => {
                         exit={{opacity:0,scale:0.6}}
                         className='w-40 bg-gray-50 top-12 right-[-20px]  shadow-xl rounded-md absolute flex flex-col '>
                 {
-                user && user.email==='shobhnikw@gmail.com' &&(
+                user && user.email &&(
                     <Link to={'/createItem'}>
-                    <p className='px-4 py-2 flex items-center justify-center gap-3 hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor'>New item <MdAdd/> </p>
+                    <p onClick={()=>setMenu(false)} className='px-4 py-2 flex items-center justify-center gap-3 hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor'>New item <MdAdd/> </p>
                     </Link>
                 ) 
                 }
@@ -147,19 +147,19 @@ const Header = () => {
                 {/* 1->the create item option  */}
 
                 {
-                user && user.email==='shobhnikw@gmail.com' &&(
+                user && user.email && (
                     <Link to={'/createItem'}>
-                    <p className='px-4 py-2 flex items-center  gap-3 hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor'>New item <MdAdd/> </p>
+                    <p onClick={()=>setMenu(false)} className='px-4 py-2 flex items-center  gap-3 hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor'>New item <MdAdd/> </p>
                     </Link>
                 ) 
                 }
                 {/* 2->the ul of the laptop view  */}
                 
                 <ul className='flex flex-col  '>
-                    <li className=' text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Home</li>
-                    <li className='text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Menu</li>
-                    <li className='text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>About us</li>
-                    <li className='text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Service</li>
+                    <li  onClick={()=>setMenu(false)} className=' text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Home</li>
+                    <li onClick={()=>setMenu(false)} className='text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Menu</li>
+                    <li onClick={()=>setMenu(false)} className='text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>About us</li>
+                    <li onClick={()=>setMenu(false)} className='text-textColor px-4 py-2 hover:bg-slate-100 hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Service</li>
                 </ul>
                 {/* 3->the logout option  */}
                 
