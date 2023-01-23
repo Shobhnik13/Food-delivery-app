@@ -2,7 +2,7 @@ import React from 'react'
 import Delivery from '../assets/delivery.png'
 import HeroBg from '../assets/heroBg.png'
 import I1 from '../assets/i1.png'
-
+import { heroData } from '../Utils/Data'
 const HomeContainer = () => {
   return (
     <section className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full h-screen' id='home'>
@@ -28,17 +28,21 @@ const HomeContainer = () => {
 
 
        {/* right view  */}
-       <div className="flex-1 py-2 flex items-center relative ">
+       <div className="flex-1 py-2 flex items-center relative justify-center ">
         {/* div 1 for img  */}
-            <img src={HeroBg} alt="" className='w-full md:w-auto h-420 ml-auto lg:h-[650px]' />
+            <img src={HeroBg} alt="" className='ml-auto h-420 w-full lg:w-auto lg:h-650' />
         {/* div 2  */}
-        <div className='absolute flex w-full h-full top-0 left-[-100px] items-center justify-center px-32 py-4'>
-            <div className='w-200 p-4 bg-cardOverlay backdrop:blur-md rounded-3xl flex flex-col items-center justify-center'>
-              <img src={I1} alt="" className='w-40 -mt-20' />
-              <p className='text-textColor text-lg font-semibold'>Icecream</p>      
-              <p className='text-sm text-lightTextGray font-semibold my-2'>Chocolate & vanilla</p>
-              <p className='text-sm font-semibold text-headingColor'><span className='text-xs text-red-600'>$</span>5.25</p>
+        <div className='absolute flex flex-wrap w-full h-full top-0 gap-4 md:left-[-100px] items-center justify-center py-4'>
+           {heroData.map((item)=>{
+            return(
+              <div key={item.id} className='lg:w-200 p-4 bg-cardOverlay backdrop:blur-md rounded-3xl flex flex-col items-center justify-center'>
+              <img src={item.imgSrc} alt="" className=' w-20 lg:w-40 -mt-10 lg:-mt-20' />
+              <p className='text-textColor text-base lg:text-xl font-semibold mt-1'>{item.name}</p>      
+              <p className='text-[12px] lg:text-sm text-lightTextGray font-semibold my-2'>{item.des}</p>
+              <p className='text-sm font-semibold text-headingColor'><span className='text-xs text-red-600'>$</span>{item.price}</p>
             </div>
+            )
+           })}
         </div>
         </div>
     
