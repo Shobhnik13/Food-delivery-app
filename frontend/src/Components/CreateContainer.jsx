@@ -1,8 +1,22 @@
 import React from 'react'
 import { useState } from 'react'
 import { motion } from 'framer-motion';
-import {MdFastfood} from 'react-icons/md'
+import {MdFastfood,MdCloudUpload,MdDelete,MdFoodBank,MdAttachMoney} from 'react-icons/md'
+import { categories } from '../Utils/Data';
+import Loader from './Loader';
 const CreateContainer = () => {
+  //upload image function
+  const uploadImage=()=>{
+
+  }
+  //del image func
+  const delImage=()=>{
+
+  }
+  //save details function
+  const saveDetails=()=>{
+
+  }
   //creating all states
   const [title,setTitle]=useState('');
   const [calories,setCalories]=useState('');
@@ -17,9 +31,10 @@ const CreateContainer = () => {
     // main div 
     <div className='w-full h-auto flex items-center justify-center min-h-screen'>
       {/* div that contains the structure for the inner divs  */}
-      <div className='w-[90%] md:w-[75%] border border-gray-300  rounded-lg p-4 flex flex-col justify-center items-center'>
+      <div className='w-[90%] md:w-[75%] border border-gray-300 gap-4 rounded-lg p-4 flex flex-col justify-center items-center'>
         {
           fields &&(
+            // p/div for alert message only renders when fields is true 
             <motion.p
             initial={{opacity:0}}
             animate={{opacity:1}}
@@ -30,7 +45,7 @@ const CreateContainer = () => {
               :` bg-emerald-400 text-emerald-800`
           } `}>{msg}</motion.p>
           )}
-           {/* input div which will be inside the outer structured div  */}
+           {/* input div for title uploading  */}
           <div className='w-full py-2 border-b border-gray-300 flex items-center gap-2 '>
             <MdFastfood className='text-gray-700 text-xl' />
             <input type="text" 
@@ -40,7 +55,84 @@ const CreateContainer = () => {
               className='w-full h-full text-lg bg-transparent font-semibold outline-none border-none placeholder:text-gray-400 '
               onChange={(e)=>setTitle(e.target.value)}
               />
-              
+          </div>
+          {/* select tags div  */}
+          <div className='w-full'>
+              <select name="" id=""  onChange={(e)=>setCategory(e.target.value)} className='border-b-2 outline-none p-2 rounded-md cursor-pointer w-full border-gray-200 ' >
+                <option value="other" className='bg-white'>Select Category</option>
+                {/* rendering teh other option cats from data  */}
+                {categories.map((item)=>{
+                  return(
+                    <option 
+                    value={item.urlParamName}
+                    key={item.id}
+                    className='bg-white text-headingColor text-base border-0 outline-none capitalize'
+                    >
+                      {item.name}
+                    </option>
+                  )
+                })}
+              </select>
+          </div>
+          {/* div for image uploading  */}
+          <div className='flex flex-col justify-center items-center border-2 border-dotted border-gray-300 w-full rounded-lg h-225 md:h-420 cursor-pointer'>
+            {/* adding a loader by tailwind css  */}
+          {loading
+          ?(<Loader/>)
+          :(<>
+            {
+              // if not-imageasset is true means when image is not present  
+            !imageAsset
+            ?(<>
+            {/* main label div  */}
+            <label className='w-full h-full flex flex-col justify-center items-center cursor-pointer '>
+                {/* div for upload logo and headline  */}
+                <div className="w-full h-full flex flex-col justify-center items-center gap-2">
+                  <MdCloudUpload className='text-gray-500 text-3xl hover:text-gray-700'/>
+                  <p className='text-gray-500'>Clich here to upload</p>
+                </div>
+                {/* /inpu div  */}
+                  <input type="file" className='hidden' name="uploadImage" id="" accept='image/*' onChange={uploadImage} />
+            </label>
+            </>)
+            :(<>
+              <div className="relative h-full">
+                  <img src={imageAsset} alt="uploadedImage" className='w-full h-full object-cover' />
+                  <button onClick={delImage} className='absolute  bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl outline-none cursor-pointer hover:shadow-md transition-all duration-100 ease-in-out'><MdDelete className='text-white'/></button>
+              </div>
+            </>)
+            }
+          </>)
+          }
+          </div>
+          {/* main div for calorie input and price input and submit button */}
+          <div className='w-full flex flex-col md:flex-row items-center gap-3'>
+            {/* calorie div  */}
+            <div className='w-full py-2 border-b border-gray-300 flex items-center gap-2'>
+              <MdFoodBank className='text-gray-700 text-2xl'/>
+              <input type="text"
+               required 
+               value={calories}
+               onChange={(e)=>setCalories(e.target.value)}
+               placeholder='Calories'
+                className='w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-600 text-textColor' 
+                />
+            </div>
+            {/* price div  */}
+            <div className='w-full py-2 border-b border-gray-300 flex items-center gap-2'>
+              <MdAttachMoney className='text-gray-700 text-2xl'/>
+              <input type="text"
+               required 
+               value={price}
+               onChange={(e)=>setPrice(e.target.value)}
+               placeholder='Price'
+                className='w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-600 text-textColor' 
+                />
+            </div>
+          </div>
+          {/* button for submitting details NOT INCLUDES IN CALS OR PRICE DIV BUT IN EXTERNAL DIV AS ANOTHER PART JUST LIKE CALS/PRICE ONLY */}
+          <div className='flex items-center w-full'>
+              <button onClick={saveDetails} className='md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-white text-lg font-semibold'>Save</button>
           </div>
       </div>
     </div>
