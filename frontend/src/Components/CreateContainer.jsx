@@ -4,14 +4,57 @@ import { motion } from 'framer-motion';
 import {MdFastfood,MdCloudUpload,MdDelete,MdFoodBank,MdAttachMoney} from 'react-icons/md'
 import { categories } from '../Utils/Data';
 import Loader from './Loader';
+import { deleteObject, getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
+import { storage } from '../Firebase';
 const CreateContainer = () => {
   //upload image function
-  const uploadImage=()=>{
-
+  const uploadImage=(e)=>{
+      setLoading(true)
+      const imageFile=e.target.files[0]
+      // console.log(imageFile)
+      const storageRef=ref(storage,`images/${Date.now()}-${imageFile.name}`)
+      const uploadTask=uploadBytesResumable(storageRef,imageFile)
+      // meking progressing bar 
+      uploadTask.on('state_changed',(snapshot)=>{
+        const uploadProgress=(snapshot.bytesTransferred/snapshot.totalBytes)*100
+      },
+      (error)=>{
+        console.log(error)
+        setFields(true)
+        setMsg('OOPS!! There is an error while uploading:Please try again')
+        setAlert('danger')
+        //now removing that alert status after showing it 1 time
+        setTimeout(() => {
+          setFields(false);
+          setLoading(false)
+        }, 4000);
+      },()=>{
+        getDownloadURL(uploadTask.snapshot.ref).then(downloadURL=>{
+          setImageAsset(downloadURL)
+          setLoading(false)
+          setFields(true)
+          setMsg('WOHOO!! Image uploaded successfully')
+          setAlert('success')
+          setTimeout(() => {
+            setFields(false)
+          }, 4000);
+        })
+      })
   }
   //del image func
   const delImage=()=>{
-
+      setLoading(true)
+      const deleteRef=ref(storage,imageAsset)
+      deleteObject(deleteRef).then(()=>{
+        setImageAsset(null)
+        setLoading(false)
+        setFields(true)
+        setAlert('success')
+        setMsg('Image Deleted successfully!')
+        setTimeout(() => {
+          setFields(false)
+        }, 4000);
+      })
   }
   //save details function
   const saveDetails=()=>{
@@ -105,7 +148,7 @@ const CreateContainer = () => {
           </>)
           }
           </div>
-          {/* main div for calorie input and price input and submit button */}
+          {/* main div for calorie input and price input */}
           <div className='w-full flex flex-col md:flex-row items-center gap-3'>
             {/* calorie div  */}
             <div className='w-full py-2 border-b border-gray-300 flex items-center gap-2'>
