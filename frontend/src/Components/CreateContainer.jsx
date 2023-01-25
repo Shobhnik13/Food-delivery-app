@@ -6,6 +6,7 @@ import { categories } from '../Utils/Data';
 import Loader from './Loader';
 import { deleteObject, getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../Firebase';
+import { saveItem } from '../Utils/FirebaseFunctions';
 const CreateContainer = () => {
   //upload image function
   const uploadImage=(e)=>{
@@ -58,7 +59,61 @@ const CreateContainer = () => {
   }
   //save details function
   const saveDetails=()=>{
-
+      setLoading(true)
+      try{
+        // if any of the required fields are missing show an error
+            if(!title || !calories || !imageAsset || !price || !category){
+              setFields(true)
+               setMsg('Required fields cannot be empty')
+               setAlert('danger')
+               setTimeout(() => {
+                setFields(false)
+                setLoading(false)
+               }, 4000);
+              }
+               else{
+                //means all the required fields are filled and we just need to pass and update the data
+                const data={
+                 id:`${Date.now()}`,
+                 title:title,
+                 imageURL:imageAsset,
+                 category:category,
+                 calories:calories,
+                 qty:1,
+                 price:price
+                }
+                //calling the save item data func from firebase/utils
+                saveItem(data)
+                //clearing the data after submitting it
+                clearData()
+                setLoading(false)
+                setFields(true)
+                setMsg('YAYY!! Data uploaded successfully ')
+                setAlert('success')
+                setTimeout(() => {
+                  setFields(false)
+                  setLoading(false)
+                }, 4000);
+              }
+      }
+      catch(error){
+          console.log(error)
+          setFields(true)
+          setMsg('OOPS!! Error while uploading:Please try again')
+          setAlert('danger')
+          setTimeout(() => {
+            setFields(false)
+            setLoading(false)
+          },4000);
+      }
+  }
+  //clear data func-called after submitting the entered data by user after getting uploaded by setItem(data)
+  const clearData=()=>{
+      setImageAsset(null)
+      setTitle('')
+      setCalories('')
+      setPrice('')
+      setCategory('Select a category')
   }
   //creating all states
   const [title,setTitle]=useState('');
@@ -101,7 +156,7 @@ const CreateContainer = () => {
           </div>
           {/* select tags div  */}
           <div className='w-full'>
-              <select name="" id=""  onChange={(e)=>setCategory(e.target.value)} className='border-b-2 outline-none p-2 rounded-md cursor-pointer w-full border-gray-200 ' >
+              <select required name="" id=""  onChange={(e)=>setCategory(e.target.value)} className='border-b-2 outline-none p-2 rounded-md cursor-pointer w-full border-gray-200 ' >
                 <option value="other" className='bg-white'>Select Category</option>
                 {/* rendering teh other option cats from data  */}
                 {categories.map((item)=>{
@@ -135,7 +190,7 @@ const CreateContainer = () => {
                   <p className='text-gray-500'>Clich here to upload</p>
                 </div>
                 {/* /inpu div  */}
-                  <input type="file" className='hidden' name="uploadImage" id="" accept='image/*' onChange={uploadImage} />
+                  <input required type="file" className='hidden' name="uploadImage" id="" accept='image/*' onChange={uploadImage} />
             </label>
             </>)
             :(<>
