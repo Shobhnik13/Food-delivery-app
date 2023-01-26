@@ -7,7 +7,23 @@ import Loader from './Loader';
 import { deleteObject, getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../Firebase';
 import { saveItem } from '../Utils/FirebaseFunctions';
+import { useStateValue } from '../Context/StateProvider';
+import { useEffect } from 'react';
+import { getItem } from '../Utils/FirebaseFunctions';
+import { actionType } from '../Context/Reducer';
 const CreateContainer = () => {
+  //getting the food items data state from initial state and context provider
+  const [{fooditems},dispatch]=useStateValue()
+  //fetch data function firebase
+  const fetchData=async()=>{
+    await getItem().then((data)=>{
+      dispatch({
+        type:actionType.SET_FOOD_ITEMS,
+        fooditems:data,
+      }) 
+    })
+  }
+ 
   //upload image function
   const uploadImage=(e)=>{
       setLoading(true)
@@ -95,6 +111,8 @@ const CreateContainer = () => {
                   setLoading(false)
                 }, 4000);
               }
+              // calling the fetch data function which is dispatching the actiontype and getting data from getitems func 
+              fetchData()
       }
       catch(error){
           console.log(error)

@@ -6,9 +6,12 @@ import { auth } from './Firebase'
 import { Route,Routes } from 'react-router-dom'
 import { CreateContainer,MainContainer } from './Components'
 import { AnimatePresence } from 'framer-motion'
+import { useStateValue } from './Context/StateProvider'
+import { getItem } from './Utils/FirebaseFunctions'
+import { useEffect } from 'react'
+import { actionType } from './Context/Reducer'
 function App() {
   
-
   return (
     <AnimatePresence exitBeforeEnter>
     <div className="App flex h-auto flex-col w-screen bg-primary">
