@@ -8,7 +8,7 @@ const MainContainer = () => {
     <div className='w-full h-auto items-center justify-center flex flex-col'>
       <HomeContainer/>
       {/* fruit section  */}
-      <section className="w-full my-6">
+      <section className="w-full my-56 md:my-6">
         {/* main div-contain a paragraph heading and 2logos div  */}
         <div className='w-full flex items-center justify-between'>
           {/* p    -div1  */}
@@ -25,7 +25,9 @@ const MainContainer = () => {
           </div>
         </div>
         {/* bringing the row container in fruits section but after the para and 2 logo div (which will be only visible on web) */}
-        <RowContainer/>
+        {/* as we want the row container for 2 purposes 1st is a horizontal scroll on home screen and a food section so we will use a flag section which we wil bw togglinmg true and false and decide what operation we need to perform   */}
+        
+        <RowContainer flag={true}/>
       </section>
     </div>
   )

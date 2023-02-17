@@ -2,6 +2,7 @@ import I1 from '../assets/i1.png'
 import F1 from '../assets/f1.png'
 import C3 from '../assets/c3.png'
 import FI1 from '../assets/fi1.png'
+// we will use this data for  the home conatiner box data description wise 
 export const heroData=[
     {
     id:1,
@@ -35,7 +36,8 @@ export const heroData=[
         
     }
 ]
-export const  categories=[
+// we will use this data for mapping the options in select type input 
+export const categories=[
     {
         id:1,
         name:'Chicken',
