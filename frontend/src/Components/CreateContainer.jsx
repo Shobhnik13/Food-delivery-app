@@ -112,7 +112,7 @@ const CreateContainer = () => {
                 }, 4000);
               }
               // calling the fetch data function which is dispatching the actiontype and getting data from getitems func 
-              fetchData()
+             
       }
       catch(error){
           console.log(error)
@@ -124,6 +124,7 @@ const CreateContainer = () => {
             setLoading(false)
           },4000);
       }
+      fetchData()
   }
   //clear data func-called after submitting the entered data by user after getting uploaded by setItem(data)
   const clearData=()=>{

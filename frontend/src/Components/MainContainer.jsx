@@ -3,7 +3,9 @@ import HomeContainer from './HomeContainer'
 import { motion } from 'framer-motion'
 import { MdChevronLeft,MdChevronRight } from 'react-icons/md'
 import RowContainer from './RowContainer'
+import { useStateValue } from '../Context/StateProvider'
 const MainContainer = () => {
+  const [{fooditems},dispatch]=useStateValue()
   return (
     <div className='w-full h-auto items-center justify-center flex flex-col'>
       <HomeContainer/>
@@ -27,7 +29,10 @@ const MainContainer = () => {
         {/* bringing the row container in fruits section but after the para and 2 logo div (which will be only visible on web) */}
         {/* as we want the row container for 2 purposes 1st is a horizontal scroll on home screen and a food section so we will use a flag section which we wil bw togglinmg true and false and decide what operation we need to perform   */}
         
-        <RowContainer flag={true}/>
+        <RowContainer 
+        flag={true}
+        data={fooditems}
+          />
       </section>
     </div>
   )

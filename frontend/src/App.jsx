@@ -11,7 +11,19 @@ import { getItem } from './Utils/FirebaseFunctions'
 import { useEffect } from 'react'
 import { actionType } from './Context/Reducer'
 function App() {
-  
+  const [{fooditems},dispatch]=useStateValue()
+  const fetchData=async()=>{
+    await getItem().then((data)=>{
+      dispatch({
+        type:actionType.SET_FOOD_ITEMS,
+        fooditems:data,
+      }) 
+    })
+  }
+ 
+  useEffect(()=>{
+    fetchData();
+  },[])
   return (
     <AnimatePresence exitBeforeEnter>
     <div className="App flex h-auto flex-col w-screen bg-primary">
