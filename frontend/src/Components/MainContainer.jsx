@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { MdChevronLeft,MdChevronRight } from 'react-icons/md'
 import RowContainer from './RowContainer'
 import { useStateValue } from '../Context/StateProvider'
+import MenuContainer from './MenuContainer'
 const MainContainer = () => {
   const [scrollValue,setScrollValue]=useState(0)
   useEffect(()=>{
@@ -30,7 +31,7 @@ const MainContainer = () => {
           </div>
         </div>
         {/* bringing the row container in fruits section but after the para and 2 logo div (which will be only visible on web) */}
-        {/* as we want the row container for 2 purposes 1st is a horizontal scroll on home screen and a food section so we will use a flag section which we wil bw togglinmg true and false and decide what operation we need to perform   */}
+        {/* as we want the row container for 2 purposes 1st is a horizontal scroll on home screen and a food section so we will use a flag which we wil bw togglinmg true and false and decide what operation we need to perform   */}
         
         <RowContainer 
         flag={true}
@@ -38,6 +39,8 @@ const MainContainer = () => {
         data={fooditems?.filter((item)=>item.category==='fruits')}
           />
       </section>
+      {/* meny section  */}
+     <MenuContainer/>
     </div>
   )
 }
