@@ -20,7 +20,6 @@ const RowContainer = ({flag,data,scrollValue}) => {
       `}
       >
         {
-          // bcoz data is returning in empty array or have items in it so we need to render the not available image from length of array
           data && data.length>=1 ? data.map(item=>(
             <div key={item.id} className='w-300 min-w-[300px] md:min-w-[340px] md:w-340 hover:drop-shadow-lg shadow-md backdrop-blur-lg h-[200px] my-6 bg-cardOverlay rounded-lg p-2'> 
         <div className='w-full flex items-center justify-between'>
