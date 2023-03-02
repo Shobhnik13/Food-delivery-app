@@ -19,7 +19,7 @@ const RowContainer = ({flag,data,scrollValue}) => {
       }
       `}
       >
-        {data && data.length>=1 ? data.map(item=>(
+        {data && data.map(item=>(
             <div key={item.id} className='w-300 min-w-[300px] md:min-w-[340px] md:w-340 hover:drop-shadow-lg shadow-md backdrop-blur-lg h-[200px] my-6 bg-cardOverlay rounded-lg p-2'> 
         <div className='w-full flex items-center justify-between'>
           <motion.img
@@ -40,12 +40,7 @@ const RowContainer = ({flag,data,scrollValue}) => {
         </div>
       </div>
           ))
-              :(
-                 <div className='w-full flex flex-col items-center justify-center'>
-                <img src={Notfound} className='h-340 ' alt="" />
-                <p className='text-xl text-textColor font-semibold'>Items NOT available</p>
-              </div>
-        )}
+              }
     </div>
   )
 }
