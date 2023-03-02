@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import dummyimage from '../assets/c2.png'
-import Notfound from '../assets/Notfound.svg'
+import Notfound from '../assets/NotFound.svg'
 import { MdShoppingBasket } from 'react-icons/md'
 import { useStateValue } from '../Context/StateProvider'
 const RowContainer = ({flag,data,scrollValue}) => {
