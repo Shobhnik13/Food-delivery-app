@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import dummyimage from '../assets/c2.png'
+import Notfound from '../assets/Notfound.svg'
 import { MdShoppingBasket } from 'react-icons/md'
 import { useStateValue } from '../Context/StateProvider'
 const RowContainer = ({flag,data,scrollValue}) => {
@@ -14,12 +15,13 @@ const RowContainer = ({flag,data,scrollValue}) => {
     // main div-conatin multiple combined image and cart div combinations->card comp divs 
     <div ref={rowScroll} className={`w-full scroll-smooth flex items-center my-12 gap-3
      ${
-      flag? `overflow-x-scroll scrollbar-none ` : `overflow-x-hidden flex-wrap`
+      flag? `overflow-x-scroll scrollbar-none ` : `overflow-x-hidden flex-wrap justify-center`
       }
       `}
       >
         {
-          data && data.map(item=>(
+          // bcoz data is returning in empty array or have items in it so we need to render the not available image from length of array
+          data && data.length>=1 ? data.map(item=>(
             <div key={item.id} className='w-300 min-w-[300px] md:min-w-[340px] md:w-340 hover:drop-shadow-lg shadow-md backdrop-blur-lg h-[200px] my-6 bg-cardOverlay rounded-lg p-2'> 
         <div className='w-full flex items-center justify-between'>
           <motion.img
@@ -40,7 +42,11 @@ const RowContainer = ({flag,data,scrollValue}) => {
         </div>
       </div>
           ))
-        }
+              :( <div className='w-full flex flex-col items-center justify-center'>
+                <img src={Notfound} className='h-340 ' alt="" />
+                <p className='text-xl text-textColor font-semibold'>Items NOT available</p>
+              </div>
+        )}
     </div>
   )
 }
