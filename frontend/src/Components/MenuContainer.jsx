@@ -58,7 +58,7 @@ const MenuContainer = () => {
         <div className="w-full ">
           <RowContainer
           flag={false}
-          data={fooditems?.filter(item=>item.category===filter)}/>
+          data={fooditems?.filter(item=>item.category==filter)}/>
         </div>
         </div>
     </section>
