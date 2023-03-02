@@ -5,7 +5,7 @@ import RowContainer from './RowContainer'
 import { categories } from '../Utils/Data'
 import { useStateValue } from '../Context/StateProvider'
 const MenuContainer = () => {
-    const [filter,setFilter]=useState('')
+    const [filter,setFilter]=useState('Chicken')
     const [{fooditems},dispatch]=useStateValue()
     return (
     <section className="w-full my-6" id='menu'>
@@ -58,7 +58,8 @@ const MenuContainer = () => {
         <div className="w-full ">
           <RowContainer
           flag={false}
-          data={fooditems?.filter(item=>item.category==filter)}/>
+          data={fooditems?.filter(item=>item.category == filter)}
+          />
         </div>
         </div>
     </section>
