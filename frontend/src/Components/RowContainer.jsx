@@ -40,7 +40,8 @@ const RowContainer = ({flag,data,scrollValue}) => {
         </div>
       </div>
           ))
-              :( <div className='w-full flex flex-col items-center justify-center'>
+              :(
+                 <div className='w-full flex flex-col items-center justify-center'>
                 <img src={Notfound} className='h-340 ' alt="" />
                 <p className='text-xl text-textColor font-semibold'>Items NOT available</p>
               </div>
