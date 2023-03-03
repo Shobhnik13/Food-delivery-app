@@ -5,6 +5,7 @@ import { MdChevronLeft,MdChevronRight } from 'react-icons/md'
 import RowContainer from './RowContainer'
 import { useStateValue } from '../Context/StateProvider'
 import MenuContainer from './MenuContainer'
+import CartContainer from './CartContainer'
 const MainContainer = () => {
   const [scrollValue,setScrollValue]=useState(0)
   useEffect(()=>{
@@ -12,8 +13,9 @@ const MainContainer = () => {
   const [{fooditems},dispatch]=useStateValue()
   return (
     <div className='w-full h-auto items-center justify-center flex flex-col'>
+      {/* home section */}
       <HomeContainer/>
-      {/* fruit section  */}
+      {/* fruit section scroll */}
       <section className="w-full my-56 md:my-6">
         {/* main div-contain a paragraph heading and 2logos div  */}
         <div className='w-full flex items-center justify-between'>
@@ -41,6 +43,8 @@ const MainContainer = () => {
       </section>
       {/* meny section  */}
      <MenuContainer/>
+     {/* cart section  */}
+     <CartContainer/>
     </div>
   )
 }
