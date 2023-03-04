@@ -8,7 +8,7 @@ const MenuContainer = () => {
     const [filter,setFilter]=useState('Chicken')
     const [{fooditems},dispatch]=useStateValue()
     return (
-    <section className="w-full my-6" id='menu'>
+    <section className="w-full my-6 -mt-24 md:-mt-20" id='menu'>
         <div className="flex flex-col items-center justify-center">
         <p className="mr-auto before:absolute mt-4 before:rounded-lg before:content before:w-16 before:h-1 before:-bottom-2 before:left-6 before:bg-gradient-to-tr from-orange-400 to-orange-600 transition-all ease-in-out duration-100 text-2xl font-semibold capitalize text-headingColor relative ">
             Our Hot Dishes

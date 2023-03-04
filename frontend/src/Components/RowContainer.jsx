@@ -4,12 +4,26 @@ import dummyimage from '../assets/c2.png'
 import Notfound from '../assets/NotFound.svg'
 import { MdShoppingBasket } from 'react-icons/md'
 import { useStateValue } from '../Context/StateProvider'
+import { actionType } from '../Context/Reducer'
 const RowContainer = ({flag,data,scrollValue}) => {
   // console.log(data)
+  const [items,setItems]=useState([])
+  const [{cartItems},dispatch]=useStateValue()
+  const addToCart=()=>{
+// console.log(item)
+dispatch({
+  type:actionType.SET_CART_ITEMS,
+  cartItems:items,
+})
+localStorage.setItem('cartItems',JSON.stringify(items))
+  }
   const rowScroll=useRef()
   useEffect(()=>{
     rowScroll.current.scrollLeft +=scrollValue
   },[scrollValue])
+  useEffect(()=>{
+    addToCart()
+  },[items])
   return (
     
     // main div-conatin multiple combined image and cart div combinations->card comp divs 
@@ -28,7 +42,7 @@ const RowContainer = ({flag,data,scrollValue}) => {
         <motion.div
         whileTap={{scale:0.75}}
         className='w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md'>
-          <MdShoppingBasket size={18} className='text-white'/>
+          <MdShoppingBasket onClick={()=>setItems([...cartItems,item])} size={18} className='text-white'/>
         </motion.div>
         </div>
         <div className="w-full flex flex-col justify-end items-end -mt-8">

@@ -16,7 +16,7 @@ const MainContainer = () => {
       {/* home section */}
       <HomeContainer/>
       {/* fruit section scroll */}
-      <section className="w-full my-56 md:my-6">
+      <section className="w-full my-28 md:my-14">
         {/* main div-contain a paragraph heading and 2logos div  */}
         <div className='w-full flex items-center justify-between'>
           {/* p    -div1  */}

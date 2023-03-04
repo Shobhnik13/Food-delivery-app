@@ -1,7 +1,8 @@
 export const actionType={
     SET_USER:'SET_USER',
     SET_FOOD_ITEMS:'SET_FOOD_ITEMS',
-    SET_CART_SHOW:'SET_CART_SHOW'
+    SET_CART_SHOW:'SET_CART_SHOW',
+    SET_CART_ITEMS:'SET_CART_ITEMS',
 }
 const Reducer=(state,action)=>{
     switch(action.type){
@@ -22,7 +23,13 @@ const Reducer=(state,action)=>{
                     //keeping whole state same but updating cart show
                     ...state,
                     cartShow:action.cartShow,
-                }
+                };
+                case actionType.SET_CART_ITEMS:
+                    return{
+                        //whole state same update cart items
+                        ...state,
+                        cartItems:action.cartItems,
+                    }
             default:
             return state;
     }

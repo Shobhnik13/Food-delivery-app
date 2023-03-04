@@ -18,7 +18,7 @@ const Header = () => {
     const provider = new GoogleAuthProvider();
 
     // state management using use reducer
-    const[{user,cartShow},dispatch]=useStateValue()
+    const[{user,cartShow,cartItems},dispatch]=useStateValue()
     
     //logout function
     const logout=()=>{
@@ -77,9 +77,13 @@ const showCart=()=>{
                 {/* div for cart image and cart item text circle  */}
                 <div className='flex items-center justify-center relative' onClick={showCart}>
                     <MdShoppingBasket className='text-textColor cursor-pointer' size={30}/>
-                     <div className='absolute top-[-6px] left-[22px] bg-cartNumBg rounded-full w-5 h-5 flex items-center justify-center'>
-                    <p className='text-xs text-white font-semibold'>1</p>
+                     {
+                        cartItems && cartItems.length>0&&(
+                            <div className='absolute top-[-6px] left-[22px] bg-cartNumBg rounded-full w-5 h-5 flex items-center justify-center'>
+                    <p className='text-xs text-white font-semibold'>{cartItems.length}</p>
                     </div>
+                        )
+                     }
                 </div>
                 {/* user auth logo  */}
                 <div className='relative'> {/*div for user image and the drop sown menu of user we need to set this div as relative to set the absolute div of drop down menu */ } 
@@ -120,9 +124,13 @@ const showCart=()=>{
 
         <div className='flex items-center justify-center relative' onClick={showCart}>
                     <MdShoppingBasket className='text-textColor cursor-pointer' size={30}/>
-                     <div className='absolute top-[-6px] left-[22px] bg-cartNumBg rounded-full w-5 h-5 flex items-center justify-center'>
-                    <p className='text-xs text-white font-semibold'>1</p>
+                    {
+                        cartItems && cartItems.length>0&&(
+                            <div className='absolute top-[-6px] left-[22px] bg-cartNumBg rounded-full w-5 h-5 flex items-center justify-center'>
+                    <p className='text-xs text-white font-semibold'>{cartItems.length}</p>
                     </div>
+                        )
+                     }
                 </div>
                 
         {/* 2-> middle side contains logo and name  */}
