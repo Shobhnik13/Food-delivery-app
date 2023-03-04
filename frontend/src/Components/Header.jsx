@@ -18,7 +18,7 @@ const Header = () => {
     const provider = new GoogleAuthProvider();
 
     // state management using use reducer
-    const[{user},dispatch]=useStateValue()
+    const[{user,cartShow},dispatch]=useStateValue()
     
     //logout function
     const logout=()=>{
@@ -31,7 +31,13 @@ const Header = () => {
             user:null
         })
     }
-
+//show cart func
+const showCart=()=>{
+    dispatch({
+        type:actionType.SET_CART_SHOW,
+        cartShow:!cartShow,
+    });
+}
     //login function
     const login=async ()=>{
             if(!user){  {/* if user is not present then fetch user and dispatch the action and user data*/ }
@@ -69,7 +75,7 @@ const Header = () => {
                     <li className='text-textColor  hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Service</li>
                 </ul>
                 {/* div for cart image and cart item text circle  */}
-                <div className='flex items-center justify-center relative'>
+                <div className='flex items-center justify-center relative' onClick={showCart}>
                     <MdShoppingBasket className='text-textColor cursor-pointer' size={30}/>
                      <div className='absolute top-[-6px] left-[22px] bg-cartNumBg rounded-full w-5 h-5 flex items-center justify-center'>
                     <p className='text-xs text-white font-semibold'>1</p>
@@ -112,7 +118,7 @@ const Header = () => {
         {/* mobile div will contain 3 sides */}
         {/* 1->left side contains cart and circle  */}
 
-        <div className='flex items-center justify-center relative'>
+        <div className='flex items-center justify-center relative' onClick={showCart}>
                     <MdShoppingBasket className='text-textColor cursor-pointer' size={30}/>
                      <div className='absolute top-[-6px] left-[22px] bg-cartNumBg rounded-full w-5 h-5 flex items-center justify-center'>
                     <p className='text-xs text-white font-semibold'>1</p>

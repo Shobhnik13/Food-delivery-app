@@ -5,13 +5,26 @@ import dummyImage from '../assets/r1.png'
 import {BiMinus} from 'react-icons/bi'
 import {BiPlus} from 'react-icons/bi'
 import {RiRefreshFill} from 'react-icons/ri'
+import { useStateValue } from '../Context/StateProvider'
+import { actionType } from '../Context/Reducer'
 const CartContainer = () => {
+    const [{cartShow},dispatch]=useStateValue()
+    const showCart=()=>{
+        dispatch({
+            type:actionType.SET_CART_SHOW,
+            cartShow:!cartShow,
+        }); 
+    }
   return (
-    <div className='top-0 right-0 fixed  w-full md:w-375 h-screen z-[101] bg-white drop-shadow-md flex flex-col'>
+    <motion.div 
+    initial={{opacity:0,x:200}}
+    animate={{opacity:1,x:0}}
+    exit={{opacity:0,x:200}}
+    className='top-0 right-0 fixed  w-full md:w-375 h-screen z-[101] bg-white drop-shadow-md flex flex-col'>
         {/* top section div  */}
        <div className='w-full flex items-center justify-between p-4 cursor-pointer'>
             {/* div1  */}
-            <motion.div whileTap={{scale:0.75}}>
+            <motion.div whileTap={{scale:0.75}} onClick={showCart}>
             <MdOutlineKeyboardBackspace className='text-textColor text-3xl'/>
             </motion.div>
             {/* div 2 */}
@@ -74,7 +87,7 @@ const CartContainer = () => {
                 </motion.button>
             </div>
         </div>   
-    </div>
+    </motion.div>
   )
 }
 

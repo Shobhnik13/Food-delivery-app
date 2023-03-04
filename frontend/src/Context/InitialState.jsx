@@ -6,4 +6,5 @@ const userInfo=fetchUser()
 export const InitialState={
     user:userInfo,
     fooditems:null,
+    cartShow:false,
 }

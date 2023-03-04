@@ -8,9 +8,9 @@ import MenuContainer from './MenuContainer'
 import CartContainer from './CartContainer'
 const MainContainer = () => {
   const [scrollValue,setScrollValue]=useState(0)
+  const [{fooditems,cartShow},dispatch]=useStateValue()
   useEffect(()=>{
-  },[scrollValue])
-  const [{fooditems},dispatch]=useStateValue()
+  },[scrollValue,cartShow])
   return (
     <div className='w-full h-auto items-center justify-center flex flex-col'>
       {/* home section */}
@@ -44,7 +44,7 @@ const MainContainer = () => {
       {/* meny section  */}
      <MenuContainer/>
      {/* cart section  */}
-     <CartContainer/>
+     {cartShow && (<CartContainer/>)}
     </div>
   )
 }
