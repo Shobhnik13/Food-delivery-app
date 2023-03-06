@@ -7,8 +7,23 @@ import {BiPlus} from 'react-icons/bi'
 import {RiRefreshFill} from 'react-icons/ri'
 import { useStateValue } from '../Context/StateProvider'
 import { actionType } from '../Context/Reducer'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { auth } from '../Firebase'
+import CartItem from './CartItem'
 const CartContainer = () => {
-    const [{cartShow,cartItems},dispatch]=useStateValue()
+    const [{cartShow,cartItems,user},dispatch]=useStateValue()
+    const provider=new GoogleAuthProvider();
+    const Login=async()=>{
+        if(!user){
+            const {user:{refreshToken,providerData}}=await signInWithPopup(auth,provider);
+            dispatch({
+                type:actionType.SET_USER,
+                user:providerData[0],
+            })
+            localStorage.setItem('user',JSON.stringify(providerData[0]))
+        }
+
+    }
     const showCart=()=>{
         dispatch({
             type:actionType.SET_CART_SHOW,
@@ -40,21 +55,7 @@ const CartContainer = () => {
             {/* cart item div */}
                {cartItems && cartItems.map((item)=>{
                 return(
-                    <div key={item.id} className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2">
-                    {/* div1 ->image  */}
-                    <img src={item.imageURL} alt="" className='w-20 h-20 object-contain rounded-full max-w-[60px]' />
-                        {/* div2->name  */}
-                        <div className='flex flex-col gap-2'>
-                            <p className='text-base text-gray-50'>{item.title}</p>
-                            <p className='text-sm block text-gray-300 font-semibold'>${item.price}</p>
-                        </div>
-                        {/* div3->button  */}
-                        <div className='group flex items-center gap-2 ml-auto cursor-pointer'>
-                        <motion.div whileTap={{scale:0.75}}><BiMinus className='text-gray-50'/></motion.div>
-                        <p className='w-5 h-5 rounded-sm bg-cartBg text-gray-50 flex items-center justify-center'>{item.qty}</p>
-                        <motion.div whileTap={{scale:0.75}}><BiPlus className='text-gray-50'/></motion.div>
-                        </div>
-                    </div>
+                    <CartItem key={item.id} item={item}/>
                 )
                })}
         </div>
@@ -84,13 +85,24 @@ const CartContainer = () => {
                 <p className='text-gray-200 text-xl font-semibold'>$24</p>
             </div>
             {/* button  */}
-            <motion.button 
+            {user 
+            ?(<motion.button 
             whileTap={{scale:0.8}}
             type='button'
             className='w-full p-2 rounded-full text-gray-50 text-lg my-2 hover:shadow-lg  bg-gradient-to-tr from-orange-400 to-orange-600'>
                 Check Out
-            </motion.button>
-        </div>
+            </motion.button>)
+            :(
+                <motion.button 
+                    onClick={Login}
+                    whileTap={{scale:0.8}}
+                    type='button'
+                    className='w-full p-2 rounded-full text-gray-50 text-lg my-2 hover:shadow-lg  bg-gradient-to-tr from-orange-400 to-orange-600'>
+                        Log in to Check Out
+                    </motion.button>)
+                    
+            }
+                   </div>
     </div>):(
             <div className='w-full h-full flex flex-col items-center justify-center gap-6'>
                     <img src={emptyCart} alt="" />
