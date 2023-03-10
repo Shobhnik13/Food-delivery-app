@@ -27,9 +27,9 @@ const MainContainer = () => {
           {/* itt will be hidden on mobile screes */}
           <div className=" items-center hidden gap-3 md:flex">
             {/* logo1 */}
-            <motion.div onClick={()=>setScrollValue(-950)} whileTap={{scale:0.75}} className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg"><MdChevronLeft className='text-lg'/></motion.div>
+            <motion.div onClick={()=>setScrollValue(preValue=>preValue-200)} whileTap={{scale:0.75}} className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg"><MdChevronLeft className='text-lg'/></motion.div>
             {/* logo2 */}
-            <motion.div onClick={()=>setScrollValue(950)} whileTap={{scale:0.75}} className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg"><MdChevronRight  className='text-lg'/></motion.div>
+            <motion.div onClick={()=>setScrollValue(preValue=>preValue+200)} whileTap={{scale:0.75}} className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg"><MdChevronRight  className='text-lg'/></motion.div>
           </div>
         </div>
         {/* bringing the row container in fruits section but after the para and 2 logo div (which will be only visible on web) */}

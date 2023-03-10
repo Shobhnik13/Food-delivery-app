@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdOutlineKeyboardBackspace } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import emptyCart from '../assets/emptyCart.svg'
@@ -13,6 +13,16 @@ import CartItem from './CartItem'
 const CartContainer = () => {
     const [{cartShow,cartItems,user},dispatch]=useStateValue()
     const provider=new GoogleAuthProvider();
+    // will use flag as an indicator when the items get chnaged -> inc/dec 
+    const [flag,setFlag]=useState(0);
+    // will use total when items get total 
+    const [total,setTotal]=useState(0);
+    useEffect(()=>{
+       let totalPrice=cartItems.reduce(function(accumulator,item){
+       return  accumulator+ item.qty*item.price
+    },0) 
+    setTotal(totalPrice);
+    },[total,flag])
     const Login=async()=>{
         if(!user){
             const {user:{refreshToken,providerData}}=await signInWithPopup(auth,provider);
@@ -55,7 +65,7 @@ const CartContainer = () => {
             {/* cart item div */}
                {cartItems && cartItems.map((item)=>{
                 return(
-                    <CartItem key={item.id} item={item}/>
+                    <CartItem key={item.id} item={item} flag={flag} setFlag={setFlag}/>
                 )
                })}
         </div>
@@ -66,14 +76,14 @@ const CartContainer = () => {
                 {/* div1->subtotal  */}
                 <p className='text-gray-400 text-lg '>Sub Total</p>
                 {/* div2->amount  */}
-                <p className='text-gray-400 text-lg '>$12</p>
+                <p className='text-gray-400 text-lg '>${total}</p>
             </div>
-          {/* outer subtotal section  */}
+          {/* outer delivery section  */}
           <div className="w-full flex items-center justify-between">
                 {/* div1->subtotal  */}
-                <p className='text-gray-400 text-lg '>Sub Total</p>
+                <p className='text-gray-400 text-lg '>Delivery</p>
                 {/* div2->amount  */}
-                <p className='text-gray-400 text-lg '>$12</p>
+                <p className='text-gray-400 text-lg '>$2</p>
             </div>
             {/* border b/w subtotal and total  */}
             <div className="w-full border-b border-gray-600 my-2"></div>
@@ -82,7 +92,7 @@ const CartContainer = () => {
                 {/* div1->total  */}
                 <p className='text-gray-200 text-xl font-semibold'>Total</p>
                 {/* div2->amount  */}
-                <p className='text-gray-200 text-xl font-semibold'>$24</p>
+                <p className='text-gray-200 text-xl font-semibold'>${total+2}</p>
             </div>
             {/* button  */}
             {user 

@@ -21,6 +21,7 @@ localStorage.setItem('cartItems',JSON.stringify(items))
   useEffect(()=>{
     rowScroll.current.scrollLeft +=scrollValue
   },[scrollValue])
+  
   useEffect(()=>{
     addToCart()
   },[items])
